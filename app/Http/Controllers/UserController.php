@@ -47,25 +47,42 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        if (!isset($user)) {
+            return redirect()->route('posts.index');
+        }
+        return view('users.show', [
+            'user' => $user
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|min:2',
+            'email' => 'nullable|string'
+        ]);
+
+        $updateBool = $user->update($validatedData);
+        if ($updateBool === true) {
+            return redirect()->route('users.show', $user->id);
+        } else {
+            return redirect()->route('users.edit', $user->id);
+        }
     }
 
     /**

@@ -20,13 +20,16 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.e
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update')->middleware('auth');
 
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete')->middleware('auth');
-
-
 //users
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
 Route::get('/users/registerForm', [UserController::class, 'create'])->name('users.registerForm')->middleware('guest');
 Route::post('/users/register', [UserController::class, 'store'])->name('users.register')->middleware('guest');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('auth');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+
+
 
 
 Route::get('/sessions/login-form', [SessionController::class, 'loginForm'])->name('sessions.loginform')->middleware('guest');
