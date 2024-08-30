@@ -5,7 +5,7 @@
                 <h2 class="text-2xl font-semibold">Edit User</h2>
             </div>
             <div class="p-6">
-                <form action="{{route('users.update',$user->id)}}" method="POST">
+                <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
@@ -18,6 +18,12 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                         <input type="text" id="email" name="email" value="{{$user->email}}"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Image</label>
+                        <input type="file" name="image_url" id="image" class=" w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none
+                        focus:ring focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
                     <div class="mt-6">

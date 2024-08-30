@@ -9,6 +9,7 @@
             <thead>
                 <tr class="w-full bg-blue-600 text-white">
                     <th class="py-3 px-4 text-left">#</th>
+                    <th class="py-3 px-4 text-left">Image</th>
                     <th class="py-3 px-4 text-left">Name</th>
                     <th class="py-3 px-4 text-left w-[400px]">Email</th>
                     <th class="py-3 px-4 text-left">CreatedAt</th>
@@ -19,15 +20,18 @@
                 @foreach ($users as $user)
                 <tr class="border-b">
                     <td class="py-3 px-4">{{$user->id}}</td>
+                    <td class="py-3 px-4">
+                        <img src="{{$user->image_url}}" alt="image" class="w-20" />
+                    </td>
                     <td class="py-3 px-4">{{ $user->name }}</td>
                     <td class="py-3 px-4">{{ $user->email }}</td>
                     <td class="py-3 px-4">{{ $user->created_at }}</td>
                     <td class="py-3 px-4 flex items-center gap-2">
-                        <a href="#"
+                        <a href="{{route('users.show',$user->id)}}"
                             class="py-2 px-3 rounded-md bg-blue-500 hover:bg-blue-600 duration-150 transition-all text-white">
                             Show
                         </a>
-                        <a href="#"
+                        <a href="{{route('users.edit',$user->id)}}"
                             class="py-2 px-3 rounded-md bg-green-500 hover:bg-green-600 duration-150 transition-all text-white">Edit</a>
                         <form method="user" action="#">
                             @csrf

@@ -29,9 +29,6 @@ Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
 
-
-
-
 Route::get('/sessions/login-form', [SessionController::class, 'loginForm'])->name('sessions.loginform')->middleware('guest');
 Route::post('/sessions/login', [SessionController::class, 'login'])->name('sessions.login')->middleware('guest');
 Route::delete('/sessions/logout', [SessionController::class, 'logout'])->name('sessions.logout')->middleware('auth');

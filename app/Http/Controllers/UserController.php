@@ -74,8 +74,15 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'nullable|string|min:2',
-            'email' => 'nullable|string'
+            'email' => 'nullable|string',
+            'image_url' => 'nullable|image'
         ]);
+
+        $imageName = time() . '.' . $request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        $validatedData['image_url'] = 'images/' . $imageName;
 
         $updateBool = $user->update($validatedData);
         if ($updateBool === true) {

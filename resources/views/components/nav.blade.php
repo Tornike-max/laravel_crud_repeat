@@ -1,3 +1,7 @@
+<?php
+ $uri = $_SERVER['REQUEST_URI'];
+?>
+
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -10,10 +14,12 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         @guest
                         <a href="{{route('users.registerForm')}}"
-                            class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-                            aria-current="page">Register</a>
+                            class="rounded-md  <?= $uri === '/users/registerForm' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> px-3 py-2 text-sm font-medium "
+                            aria-current="page">
+                            Register
+                        </a>
                         <a href="{{route('sessions.loginform')}}"
-                            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+                            class="rounded-md px-3 py-2 text-sm font-medium <?= $uri === '/sessions/login-form' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?>">Login</a>
                         @endguest
                         @auth
                         <a href="{{route('posts.index')}}"
@@ -54,6 +60,7 @@
                         </div>
 
 
+                        @auth
                         <div id="dropdown-content"
                             class="absolute hidden right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -69,6 +76,7 @@
                                     role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
                             </form>
                         </div>
+                        @endauth
                     </div>
                 </div>
             </div>
